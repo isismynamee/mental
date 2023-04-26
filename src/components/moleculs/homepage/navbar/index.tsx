@@ -44,7 +44,7 @@ export const Navbar = ({
   return (
     <React.Fragment>
       <div className='flex text-black'>
-        <div id='top' className="h-[100vh] bg-gradient-to-t from-cyan-500 to-blue-500 w-3/12">
+        <div id='top' className="h-[100vh] bg-gradient-to-t from-blue-500 to-cyan-500 w-3/12">
           <div className='flex justify-between'>
             <Image priority={true} className='mx-auto' src={image.logo} width={200} alt="" />
           </div>

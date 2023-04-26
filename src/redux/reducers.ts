@@ -1,8 +1,10 @@
 import {combineReducers} from 'redux'
-import { News } from './news/reducer'
+import { News } from './sagas/news/reducer'
+import {Users} from './sagas/users/reducer'
 
 export const reducers = combineReducers({
-    News
+    Users,
+    News,
 })
 
 export type RootState = ReturnType<typeof reducers>

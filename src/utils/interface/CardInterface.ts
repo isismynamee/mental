@@ -1,0 +1,3 @@
+interface CardInterface{
+    item: any
+}

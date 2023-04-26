@@ -1,16 +1,18 @@
 import { Homepage } from '@/components/moleculs/homepage'
-import { actionsNews } from '@/redux/news/actions'
+import { actionsNews } from '@/redux/sagas/news/actions'
 import React, { useCallback, useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { LoginComponent } from '@/components/moleculs/login'
+import { LoginComponent } from '@/components/moleculs/homepage/login'
+import { useRouter } from 'next/router'
 
 export default function Login(){
+    const route = useRouter()
+    const dispatch = useDispatch()
     const [formInputLogin, setFormInputLogin] = useState<String>('')
     const [formInputRegister, setFormInputRegister] = useState<String>('')
     const [login, setLogin] = useState<boolean>(false)
     const [seePassword, setSeePassword] = useState<boolean>(false)
-
-    console.log(formInputLogin, formInputRegister, "form input")
+    const [seeRePassword, setSeeRePassword] = useState<boolean>(false)
 
     const changeInputLogin = useCallback(
       (e: React.FormEvent<HTMLInputElement>): void => {
@@ -40,13 +42,41 @@ export default function Login(){
       }, [setSeePassword, seePassword]
     )
 
-    const submit = useCallback(
+    const rePass = useCallback(
+      () => {
+        setSeeRePassword(!seeRePassword)
+      }, [setSeeRePassword, seeRePassword]
+    )
+
+    const changeLogin = useCallback(
       () => {
         setLogin(!login)
       }, [setLogin, login]
     )
+
+    const submit = useCallback(
+      () => {
+        if(login){
+          dispatch({
+            type: "POST_REGISTER", 
+            payload: {
+              userName: formInputRegister.userName ,
+              firstName: formInputRegister.firstName ,
+              lastName: formInputRegister.lastName ,
+              password: formInputRegister.password ,
+            }
+          })
+          setLogin(!login)
+        }else{
+          dispatch({
+            type: "FETCHING_USERS", 
+            payload: formInputLogin
+          })
+          route.push('/')
+        }
+      }, [formInputLogin, formInputRegister, setLogin, login, dispatch, route]
+    )
     
-    const dispatch = useDispatch()
     useEffect(() => {
         dispatch({
           type: "FETCHING_NEWS", 
@@ -57,9 +87,14 @@ export default function Login(){
     return (
       <Homepage>
         <LoginComponent
+          viewRePass={seeRePassword}
+          rePass={rePass}
+          formInputLogin={formInputLogin}
+          formInputRegister={formInputRegister}
           changeInputRegister={changeInputRegister}
           login={login}
           changeInputLogin={changeInputLogin}
+          changeLogin={changeLogin}
           submit={submit}
           seePassword={seePassword}
           viewPass={viewPass}
