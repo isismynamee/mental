@@ -29,6 +29,7 @@ export const LoginComponent = ({
   
     }
   }
+
   const disableLogin ={
     get isDisable(){
       return (
@@ -201,7 +202,7 @@ export const LoginComponent = ({
         </div>
         <div className='w-6/12 text-center mx-auto grid gap-5 my-5'>
           <span className='uppercase font-bold text-lg'>or</span>
-          <span className='capitalize'><span className="font-bold cursor-pointer" onClick={changeLogin}>join</span> with us if you don't have an account</span>
+          <span className='capitalize'><span className="font-bold cursor-pointer" onClick={changeLogin}>join</span> with us if you dont have an account</span>
         </div>
     </div>
     )}

@@ -6,33 +6,30 @@ import { GrCaretNext, GrCaretPrevious } from 'react-icons/gr'
 
 export const Paginate = () => {
     interface RootState {
-      News: NewsState;
-      // other properties
+      News: any;
     }
     const {News} = useSelector((state: RootState) => state)
-    console.log(News.news)
     const [itemOffset, setItemOffset] = useState(0);
   
-    const endOffset = itemOffset + 5;
-    console.log(`Loading items from ${itemOffset} to ${endOffset}`);
-    const pageCount = Math.ceil(News.news.length / 5);
+    const endOffset = itemOffset + 3;
+    const pageCount = Math.ceil(News.news.length / 3);
     const currentItems = News.news?.slice(itemOffset, endOffset);
   
-    // Invoke when user click to request another page.
     const handlePageClick = (e: React.FormEvent<HTMLInputElement>) => {
-      const newOffset = (endOffset * pageCount) % News.news.length;
       setItemOffset(e.selected);
     };
   return (
     <>
         <Card item={currentItems} />
-        <div className='grid w-full bg-slate-400'>
+        <div className='grid w-full'>
             <ReactPaginate
+                className="flex bg-blue-400 border-2 border-black my-4 py-1 px-4 rounded-lg justify-between mx-auto w-6/12 items-center"
                 breakLabel="..."
                 nextLabel={<GrCaretNext />}
                 onPageChange={handlePageClick}
-                pageRangeDisplayed={5}
+                pageRangeDisplayed={3}
                 pageCount={pageCount}
+                activeLinkClassName="text-white"
                 previousLabel={<GrCaretPrevious/>}
                 renderOnZeroPageCount={null}
             />

@@ -1,8 +1,8 @@
-import { Homepage } from '@/components/moleculs/homepage'
+import { Homepage } from '@/components/moleculs/Homepage'
 import { actionsNews } from '@/redux/sagas/news/actions'
 import React, { useCallback, useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { LoginComponent } from '@/components/moleculs/homepage/login'
+import { LoginComponent } from '@/components/moleculs/Homepage/login'
 import { useRouter } from 'next/router'
 
 export default function Login(){
