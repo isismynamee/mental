@@ -20,19 +20,15 @@ export const ModalAddEvents = ({
         <div className='grid gap-5'>
             <div className='grid gap-5'>
                 <label className='relative'>
-                    <MdOutlineEmail className="w-6 h-6 cursor-pointer absolute top-3 ml-2" />
-                    <input onChange={onChange} type="text" className='input input-bordered px-10' name='email' placeholder='Friends Email' />
+                    <MdOutlineEmail className="w-6 h-6 cursor-pointer absolute top-3 right-3" />
+                    <input onChange={onChange} type="text" className='input input-bordered' name='taskName' placeholder='Task Name' />
                 </label>
                 <label className='relative'>
-                    <input onChange={onChange} type="datetime-local" id='date' className='input input-bordered  w-full' name='date' placeholder='date' />
+                    <MdOutlineSubject className="w-6 h-6 cursor-pointer absolute top-3 right-3" />
+                    <input onChange={onChange} type="text" className='input input-bordered' name='description' placeholder='Description' />
                 </label>
                 <label className='relative'>
-                    <MdOutlineSubject className="w-6 h-6 cursor-pointer absolute top-3 ml-2" />
-                    <input onChange={onChange} type="text" className='input input-bordered px-10' name='subject' placeholder='Subject' />
-                </label>
-                <label className='relative'>
-                    <MdOutlineMessage className="w-6 h-6 cursor-pointer absolute top-3 ml-2" />
-                    <input onChange={onChange} type="text" className='input input-bordered px-10' name='text' placeholder='Text' />
+                    <input onChange={onChange} type="datetime-local" id='date' className='input input-bordered  w-full' name='time' placeholder='Date and Time' />
                 </label>
             </div>
             <div>

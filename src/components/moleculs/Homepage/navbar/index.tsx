@@ -15,6 +15,7 @@ export const Navbar = ({
   const [isScrolled, setIsScrolled] = useState<boolean>(false);
   const [checkLogin, setCheckLogin] = useState<boolean>(false);
   const [time, setTime] = useState<String>('')
+  let click = typeof window !== 'undefined' ? localStorage.getItem('Authorization') : ""
 
   useEffect(() => {
       window.addEventListener('scroll', handleScroll);
@@ -70,10 +71,6 @@ export const Navbar = ({
     }
   }, [])
 
-
-  // console.clear()
-
-
   return (
     <React.Fragment>
       <div className='flex text-black'>
@@ -82,6 +79,7 @@ export const Navbar = ({
             <Image priority={true} className='mx-auto' src={image.logo} width={200} alt="" />
           </div>
           <div className='grid gap-5'>
+            {click ? (
             <div className='mx-auto grid px-7 mt-10 gap-5 w-full'>
               <label className='flex items-center cursor-pointer'>
                 <IoMdNotificationsOutline className="w-5 h-5 mr-2" />
@@ -113,6 +111,39 @@ export const Navbar = ({
                 </span>
               </label>
             </div>
+            ) : (
+              <div className='mx-auto grid px-7 mt-10 gap-5 w-full'>
+                <label className='flex items-center cursor-pointer'>
+                  <IoMdNotificationsOutline className="w-5 h-5 mr-2" />
+                  <span>Notification</span>
+                </label>
+                <label className='flex items-center cursor-pointer'>
+                  <IoHomeOutline className={route.pathname === '/' ? "w-5 h-5 mr-2 text-white" : "w-5 h-5 mr-2"} />
+                  <span className={route.pathname === '/' ? "font-bold text-white fixed-clock": ""}>Home</span>
+                </label>
+                <label className='flex items-center cursor-pointer'>
+                  <IoMdCalendar className={route.pathname === '/events' ? "w-5 h-5 mr-2 text-white" : "w-5 h-5 mr-2"} />
+                  <span className={route.pathname === '/events' ? "font-bold text-white fixed-clock": ""}>Events</span>
+                </label>
+                {checkLogin ? (
+                <label onClick={logout} className='flex items-center cursor-pointer'>
+                  <RiLogoutCircleLine className={route.pathname === '/login' ? "w-5 h-5 mr-2 text-white" : "w-5 h-5 mr-2"} />
+                  <span className={route.pathname === '/login' ? "font-bold text-white fixed-clock": ""}>{"Logout"}</span>
+                </label>
+                ) : (
+                <label className='flex items-center cursor-pointer'>
+                  <IoMdLogIn className={route.pathname === '/login' ? "w-5 h-5 mr-2 text-white" : "w-5 h-5 mr-2"} />
+                  <span className={route.pathname === '/login' ? "font-bold text-white fixed-clock": ""}>{"Login"}</span>
+                </label>
+                )}
+                <label className='flex items-center cursor-pointer'>
+                  <IoMdTime className="w-5 h-5 mr-2" />
+                  <span className='fixed-clock'>
+                    {time}
+                  </span>
+                </label>
+              </div>
+              )}
             <div className='grid gap-5'>
               <label className='relative mx-6'>
                   <IoMdSearch onClick={search} className="w-6 h-6 z-10 cursor-pointer absolute top-1 ml-2" />
